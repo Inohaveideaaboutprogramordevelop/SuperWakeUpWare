@@ -16,13 +16,13 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Generate Gradle wrapper
-        run: gradle wrapper --gradle-version 8.7
-        env:
-          GRADLE_USER_HOME: /tmp/gradle-home
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
+        with:
+          gradle-version: '8.7'
 
       - name: Build debug APK
-        run: ./gradlew assembleDebug
+        run: gradle assembleDebug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
